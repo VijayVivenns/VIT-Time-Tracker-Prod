@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect to Microsoft Edge</title>
+    <script>
+        function detectBrowser() {
+            // Detect the browser using the user agent string
+            var userAgent = navigator.userAgent;
+            var isEdge = userAgent.includes("Edg");
+
+            if (!isEdge) {
+                // If the browser is not Microsoft Edge
+                var edgeAppURL = "microsoft-edge:https://apps.powerapps.com/play/e/default-c09afb75-1cf8-46ca-9c5e-0a01bfbd86f2/a/632f5867-9749-4ab0-975a-e592c4c1f8a5";
+                var edgeDownloadURL = "https://www.microsoft.com/edge";
+
+                // Show an alert asking the user to open in Edge or download it
+                if (confirm("This app is optimized for Microsoft Edge. Would you like to open it in Edge? If you don't have it installed, click OK to download.")) {
+                    // Attempt to open Microsoft Edge
+                    window.location.href = edgeAppURL;
+
+                    // If the user does not have Edge installed, redirect to the download page after a short delay
+                    setTimeout(function() {
+                        window.location.href = edgeDownloadURL;
+                    }, 2000); // Adjust timeout as needed
+                }
+            } else {
+                // Redirect to Power Apps app link if Microsoft Edge is being used
+                window.location.href = "https://apps.powerapps.com/play/e/default-c09afb75-1cf8-46ca-9c5e-0a01bfbd86f2/a/632f5867-9749-4ab0-975a-e592c4c1f8a5";
+            }
+        }
+
+        window.onload = detectBrowser;
+    </script>
+</head>
+<body>
+    <h1>Redirecting to Microsoft Edge...</h1>
+</body>
+</html>
